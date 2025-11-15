@@ -1,0 +1,37 @@
+151. Reverse Words in a String
+
+class Solution {
+public:
+    string reverseWords(string s) {
+        stack<string> st;
+int n = s.size();
+        int i = 0;
+
+        while(i < n) {
+            // skip spaces
+            while(i < n && s[i] == ' ')
+                i++;
+
+            if(i >= n) break;
+
+            // collect a word
+            string word = "";
+            while(i < n && s[i] != ' ') {
+                word += s[i];
+                i++;
+            }
+
+            st.push(word);
+        }
+        string ans = "";
+        while(st.size()>1)
+        {
+            ans += st.top();
+            ans +=" ";
+            st.pop();
+        }
+        ans +=st.top();
+        st.pop();
+        return ans;
+    }
+};
