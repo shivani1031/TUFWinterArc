@@ -1,0 +1,17 @@
+Count Occurrences in a Sorted Array
+
+
+
+class Solution {
+  public:
+    int countFreq(vector<int>& arr, int target) {
+        // code here
+                int n = arr.size();
+                int ans;
+auto itl = lower_bound(arr.begin(), arr.end(), target);
+auto utb = upper_bound(arr.begin(), arr.end(), target);
+
+         ans = utb-itl;
+        return ans;
+    }
+};
