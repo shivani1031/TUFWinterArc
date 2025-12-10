@@ -1,0 +1,46 @@
+Queue Using Array
+
+
+class myQueue {
+
+public:
+    vector<int> ans;
+    int n;
+
+    myQueue(int n) {
+        this->n = n;
+        ans.reserve(n);
+    }
+
+    bool isEmpty() {
+        return ans.size() == 0;
+    }
+
+    bool isFull() {
+        return ans.size() == n;
+    }
+
+    void enqueue(int x) {
+        if (!isFull()) {
+            ans.push_back(x);
+        }
+    }
+
+    void dequeue() {
+        if (!isEmpty()) {
+            ans.erase(ans.begin()); // remove front element
+        }
+    }
+
+    int getFront() {
+        if (!isEmpty()) 
+            return ans.front();
+        return -1; 
+    }
+
+    int getRear() {
+        if (!isEmpty()) 
+            return ans.back();
+        return -1;
+    }
+};
