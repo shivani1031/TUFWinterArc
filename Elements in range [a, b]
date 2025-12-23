@@ -1,0 +1,25 @@
+Elements in range [a, b]
+
+
+class Solution {
+  public:
+    vector<int> cntInRange(vector<int> &arr, vector<vector<int>> &queries) {
+        // code here
+        int n = arr.size();
+        sort(arr.begin(), arr.end());
+        int a,b;
+        vector<int> ans;
+   for (auto &q : queries) {
+            a = q[0];
+            b = q[1];
+          
+            int low = a;
+            int high = b;
+            int lv = lower_bound(arr.begin(), arr.end(), low)- arr.begin();
+            int uv = upper_bound(arr.begin(), arr.end(), high)-arr.begin();
+            int cnt= uv-lv;
+            ans.push_back(cnt);
+        }
+        return ans;
+    }
+};
