@@ -1,0 +1,42 @@
+Palindrome Linked List
+
+
+
+/*
+class Node {
+  public:
+    int data;
+    Node *next;
+
+    Node(int x) {
+       data = x;
+       next = NULL;
+    }
+};
+*/
+
+class Solution {
+  public:
+    bool isPalindrome(Node *head) {
+        //  code here
+        vector<int> ans;
+        while(head)
+        {
+            ans.push_back(head->data);
+            head = head->next;
+        }
+        int low =0, high = ans.size()-1;
+        // cout<<"high is"<<high<<endl;
+        while(low<=high)
+        {
+            if(ans[low] == ans[high]) {
+        // cout<<"low is"<<ans[low]<<"high is"<<ans[high]<<endl;
+                low++;
+                high--;
+          
+            }
+            else return false;
+        }
+        return true;
+    }
+};
