@@ -1,0 +1,43 @@
+Minimum number of Coins
+
+
+
+class Solution {
+  public:
+    int findMin(int n) {
+        // code here
+        int cnt =0;
+  
+            // cout<<"n is"<<n<<endl;
+            while(n>9)
+            {
+                // cout<<"n is"<<n<<endl;
+                n -=10;
+                cnt++;
+                // cout<<"cnt is"<<cnt<<endl;
+            }
+            while(n>4)
+            {
+                // cout<<"n is"<<n<<endl;
+                n -= 5;
+                cnt++; 
+                // cout<<"cnt is"<<cnt<<endl;
+            }
+            while(n>1)
+            {
+                // cout<<"n is"<<n<<endl;
+                n -= 2;
+                cnt++; 
+                // cout<<"cnt is"<<cnt<<endl;
+            }
+            while(n>0)
+            {
+                // cout<<"n is"<<n<<endl;
+                n-=1;
+                cnt++; 
+                // cout<<"cnt is"<<cnt<<endl;
+            }
+        // cout<<"n is"<<n<<endl;
+        return cnt;
+    }
+};
