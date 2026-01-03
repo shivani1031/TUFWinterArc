@@ -1,0 +1,33 @@
+N meetings in one room
+
+
+
+class Solution {
+  public:
+    // Function to find the maximum number of meetings that can
+    // be performed in a meeting room.
+    int maxMeetings(vector<int>& start, vector<int>& end) {
+        // Your code here
+        vector<pair<int, int>> meeting;
+        int n = end.size();
+        for(int i =0;i<n;i++)
+        {
+            meeting.push_back({end[i], start[i]});
+        }
+        sort(meeting.begin(), meeting.end());
+        // cout<<meeting[0].first<<meeting[0].second<<endl;
+        int cnt =1;
+        int lastend = meeting[0].first;
+        for(int i =1;i<n;i++)
+        {
+            if(meeting[i].second>lastend)
+            {
+            // cout<<"meeting[i].first and meeting[i-1].second" <<meeting[i].first<<meeting[i-1].second<<endl;
+            cnt++;
+            lastend = meeting[i].first;
+            }
+            // cout<<cnt<<endl;
+        }
+        return cnt;
+    }
+};
