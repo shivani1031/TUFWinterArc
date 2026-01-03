@@ -1,0 +1,46 @@
+Flattening a Linked List
+
+
+
+/*
+class Node {
+public:
+    int data;
+    Node* next;
+    Node* bottom;
+
+    Node(int x) {
+        data = x;
+        next = NULL;
+        bottom = NULL;
+    }
+};
+*/
+
+class Solution {
+  public:
+    Node *flatten(Node *root) {
+        // code here
+        vector<int> ans;
+        Node *temp = root;
+        while(temp)
+        {
+            Node *tempb = temp;
+            while(tempb)
+            {
+                ans.push_back(tempb->data);
+                tempb = tempb->bottom;
+            }
+            temp = temp->next;
+        }
+        sort(ans.begin(), ans.end());
+        Node *head = new Node(ans[0]);
+        Node *dummynode=head;
+        for(int i =1;i<ans.size();i++)
+        {
+            dummynode->bottom = new Node(ans[i]);
+            dummynode = dummynode->bottom;
+        }
+return head;  
+    }
+};
