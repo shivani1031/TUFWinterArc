@@ -5,22 +5,38 @@ class Solution {
   public:
     bool checkRedundancy(string &s) {
         // code here
-        int count=0;
-        stack<int>st;
-        for(auto it:s){
-            if(it=='('){
-                st.push(0);
+        stack<char> st;                 // CHANGED: int → char
+        int n = s.size();
+        int i = 0;
+
+        while (i < n) {
+            if (s[i] == '(') {
+                st.push(s[i]);          // SAME
             }
-            else if(it==')'){
-                if(st.top()<=1)return true;
-                st.pop();
+            else if ( (s[i] >= 'a' && s[i] <= 'z') ||   // CHANGED: parentheses
+                      s[i] == '+' || s[i] == '-' ||
+                      s[i] == '*' || s[i] == '/' ) {
+                st.push(s[i]);          // CHANGED: push symbols, not count
             }
-            else if(!st.empty()){
-                int x=st.top();
-                st.pop();
-                x++;
-                st.push(x);
+            else if (s[i] == ')') {
+                bool hasOperator = false;   // CHANGED: replace cnt logic
+
+                while (!st.empty() && st.top() != '(') {   // CHANGED
+                    char top = st.top();
+                    st.pop();
+                    if (top == '+' || top == '-' ||
+                        top == '*' || top == '/') {
+                        hasOperator = true;
+                    }
+                }
+
+                if (!st.empty())
+                    st.pop();           // CHANGED: remove '('  
+
+                if (!hasOperator)
+                    return true;        // CHANGED: redundancy condition  //inner loop
             }
+            i++;
         }
         return false;
     }
