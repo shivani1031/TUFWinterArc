@@ -1,0 +1,37 @@
+Maximize Number of 1's
+
+
+
+
+class Solution {
+  public:
+    int maxOnes(vector<int>& arr, int k) {
+        // code here  i did it by myself
+        int n = arr.size();
+        int maxcnt= INT_MIN;
+        int currcnt = INT_MIN;
+        int left =0;
+        int right = 0;
+        while(right<n)
+        {
+            
+          if(arr[right]==0)
+          {
+              k--;
+          }
+          while(k<0 && left<=right)
+          {
+            //   if(arr[left]==1)
+            //   l++;
+               if(arr[left]==0)
+              k++;
+              left++;
+            //   currcnt = right-left+1;
+          }
+            currcnt = right -left+1;
+            maxcnt = max(maxcnt, currcnt);
+            right++;
+        }
+        return maxcnt;
+    }
+};
