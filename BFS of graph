@@ -1,0 +1,31 @@
+BFS of graph
+
+
+
+class Solution {
+  public:
+    vector<int> bfs(vector<vector<int>> &adj) {
+        // code here
+        int n = adj.size();
+        vector<int> ans;
+        vector<int> visited(n, 0);
+        queue<int> q;
+        q.push(0);
+        visited[0] = 1;
+        while(!q.empty())
+        {
+            int x = q.front();
+            q.pop();
+            ans.push_back(x);
+            for(int &v : adj[x])
+            {
+                if(!visited[v])
+                {
+                q.push(v);
+                visited[v] = 1;
+                }
+            }
+        }
+        return ans;
+    }
+};
