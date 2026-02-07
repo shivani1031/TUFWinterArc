@@ -1,0 +1,38 @@
+733. Flood Fill
+
+
+
+class Solution {
+public:
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color) {
+        int row = image.size();
+        int col = image[0].size();
+
+        int ogc = image[sr][sc];
+        if (ogc == color) return image;  // important edge case
+
+        queue<pair<int,int>> q;
+        q.push({sr, sc});
+        image[sr][sc] = color;
+
+        int dir[4][2] = {{1,0}, {-1,0}, {0,1}, {0,-1}};
+
+        while (!q.empty()) {
+            auto [r, c] = q.front();
+            q.pop();
+
+            for (auto& d : dir) {
+                int nr = r + d[0];
+                int nc = c + d[1];
+
+                if (nr >= 0 && nc >= 0 && nr < row && nc < col &&
+                    image[nr][nc] == ogc) {
+
+                    image[nr][nc] = color;
+                    q.push({nr, nc});
+                }
+            }
+        }
+        return image;
+    }
+};
