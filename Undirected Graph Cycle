@@ -1,0 +1,67 @@
+Undirected Graph Cycle
+
+
+class Solution {
+public:
+
+    bool bfs(vector<int>& visited, vector<vector<int>>& edges, int u)
+    {
+        queue<pair<int,int>> q;  // {node, parent}
+        
+        visited[u] = 1;
+        q.push({u, -1});
+        
+        while(!q.empty())
+        {
+            int x = q.front().first;
+            int y = q.front().second;
+            q.pop();
+            
+            for(auto &v : edges[x])
+            {
+                if(!visited[v])
+                {
+                    visited[v] = 1;
+                    q.push({v, x});   // parent is x
+                }
+                else if(v != y)   // visited but not parent
+                {
+                    return true;  // cycle found
+                }
+            }
+        }
+        
+        return false;   // no cycle
+    }
+
+bool isCycle(int V, vector<vector<int>>& edges) 
+{
+    // Step 1: Create adjacency list
+    vector<vector<int>> adj(V);
+    
+    for(auto &edge : edges)
+    {
+        int u = edge[0];
+        int v = edge[1];
+        
+        adj[u].push_back(v);
+        adj[v].push_back(u);   // because undirected
+    }
+
+    // Step 2: Visited array
+    vector<int> visited(V, 0);
+
+    // Step 3: Run BFS
+    for(int i = 0; i < V; i++)
+    {
+        if(!visited[i])
+        {
+            if(bfs(visited, adj, i))
+                return true;
+        }
+    }
+
+    return false;
+}
+
+};
