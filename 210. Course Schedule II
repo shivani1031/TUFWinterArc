@@ -1,0 +1,52 @@
+210. Course Schedule II
+
+
+
+class Solution {
+public:
+    vector<int> findOrder(int numCourses, vector<vector<int>>& pre) {
+vector<vector<int>> adj(numCourses);
+vector<int> indegree(numCourses, 0);
+for(auto &node: pre)
+{
+    int willdo = node[0];
+    int parent = node[1];
+
+    adj[parent].push_back(willdo);
+    indegree[willdo]++;
+}
+
+queue<int> q;
+for(int i =0;i<numCourses;i++)
+{
+    if(indegree[i]==0)
+    q.push(i);
+}
+vector<int> ans;
+int cnt=0;
+while(!q.empty())
+{
+    int x = q.front();
+    ans.push_back(x);
+    cnt++;
+    q.pop();
+    for(auto &con: adj[x])
+    {
+        indegree[con]--;
+        if(indegree[con]==0)
+        {
+            q.push(con);
+            // indegree.erase(con)
+            // ans.push_back(con);
+        }
+    }
+}
+if(cnt == numCourses)
+{
+    return ans;
+}
+else
+return {};   // FIX
+
+    }
+};
