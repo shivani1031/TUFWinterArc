@@ -1,0 +1,25 @@
+Chocolate Distribution Problem
+
+
+
+class Solution {
+public:
+    int findMinDiff(vector<int>& a, int m) {
+        
+        if(m == 0 || m > a.size()) return 0;
+        if(m == 1) return 0;
+
+        sort(a.begin(), a.end());
+        
+        int mini = INT_MAX;
+
+        int i = 0;
+        while(i + m - 1 < a.size())
+        {
+            mini = min(mini, a[i + m - 1] - a[i]);
+            i++;
+        }
+
+        return mini;
+    }
+};
