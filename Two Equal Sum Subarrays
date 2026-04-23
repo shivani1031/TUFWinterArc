@@ -1,0 +1,47 @@
+Two Equal Sum Subarrays
+
+
+
+class Solution {
+  public:
+    bool canSplit(vector<int>& arr) {
+        // code here
+        if(arr.size()==1) return false;
+        int i =0;
+        int j = arr.size()-1;
+        int sumi =arr[i], sumj =arr[j];
+        while(i<j)
+        {
+            // cout<<"sumi is"<<sumi<<endl;
+            // cout<<"sumj is"<<sumj<<endl;
+            if(sumi<sumj)
+            {
+                i++;
+                sumi+=arr[i];
+            }
+            else if(sumi>sumj)
+            {
+                
+            j--;
+            sumj+=arr[j];
+            }
+            else
+            {
+
+            i++;
+            j--;
+            if(i<j)
+            {
+                sumi +=arr[i];
+                sumj +=arr[j];
+            }
+            if(i==j) return false;
+            }
+            // cout<<"i is"<<i<<endl;
+            // cout<<"j is"<<j<<endl;
+
+        }
+    if(sumi==sumj) return true;
+    else return false;
+    }
+};
