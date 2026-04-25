@@ -1,0 +1,43 @@
+Opposite Sign Pair Reduction
+
+
+
+class Solution {
+  public:
+    vector<int> reducePairs(vector<int>& arr) {
+        stack<int> s;
+
+        for(int i = 0; i < arr.size(); i++) {
+            int curr = arr[i];
+            bool destroyed = false;
+
+            while(!s.empty() && ((s.top() > 0 && curr < 0) || (s.top() < 0 && curr > 0))) {
+
+                if(abs(s.top()) < abs(curr)) {
+                    s.pop();
+                }
+                else if(abs(s.top()) > abs(curr)) {
+                    destroyed = true;
+                    break;
+                }
+                else {
+                    s.pop();
+                    destroyed = true;
+                    break;
+                }
+            }
+
+            if(!destroyed) {
+                s.push(curr);
+            }
+        }
+
+        vector<int> result(s.size());
+        for(int i = s.size() - 1; i >= 0; i--) {
+            result[i] = s.top();
+            s.pop();
+        }
+
+        return result;
+    }
+};
