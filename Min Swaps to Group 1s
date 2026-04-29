@@ -1,0 +1,34 @@
+Min Swaps to Group 1s
+
+
+class Solution {
+  public:
+    int minSwaps(vector<int>& arr) {
+        int n = arr.size();
+        int nof1 = 0;
+        for(int i = 0; i < n; i++) {
+            if(arr[i] == 1) nof1++;
+        }
+        
+        // Edge case: if no 1s or all are 1s, no swaps needed
+        if(nof1 == 0) return -1;
+        if(nof1 == n) return 0;
+        
+        int curr1 = 0;
+        // count 1s in the first window
+        for(int i = 0; i < nof1; i++) {
+            if(arr[i] == 1) curr1++;
+        }
+        
+        int maxi = curr1;
+        
+        // slide the window
+        for(int right = nof1; right < n; right++) {
+            if(arr[right] == 1) curr1++;
+            if(arr[right - nof1] == 1) curr1--;
+            maxi = max(maxi, curr1);
+        }
+        
+        return nof1 - maxi;
+    }
+};
