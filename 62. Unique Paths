@@ -1,0 +1,26 @@
+62. Unique Paths
+
+
+
+class Solution {
+public:
+    void solve(int row, int col, int m, int n, int *cnt) {
+        // reached destination
+        if (row == m - 1 && col == n - 1) {
+            (*cnt)++;
+            return;
+        }
+
+        // out of bounds
+        if (row >= m || col >= n) return;
+
+        solve(row + 1, col, m, n, cnt);
+        solve(row, col + 1, m, n, cnt);
+    }
+
+    int uniquePaths(int m, int n) {
+        int cnt = 0;
+        solve(0, 0, m, n, &cnt);
+        return cnt;
+    }
+};
