@@ -1,0 +1,30 @@
+Kth Largest in a Stream
+
+
+
+class Solution {
+  public:
+    vector<int> kthLargest(vector<int>& arr, int k) {
+        // min-heap to store k largest elements
+        priority_queue<int, vector<int>, greater<int>> minh;
+        vector<int> ans;
+        
+        for(int i = 0; i < arr.size(); i++) {
+            minh.push(arr[i]);
+            
+            // keep only k elements in the heap
+            if(minh.size() > k) {
+                minh.pop();
+            }
+            
+            // if we have fewer than k elements, kth largest doesn't exist yet
+            if(minh.size() < k) {
+                ans.push_back(-1);
+            } else {
+                ans.push_back(minh.top()); // kth largest is the smallest in heap
+            }
+        }
+        
+        return ans;
+    }
+};
