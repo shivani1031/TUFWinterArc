@@ -1,0 +1,71 @@
+491. Non-decreasing Subsequences
+
+
+brute:
+class Solution {
+public:
+    void solve(vector<int>& nums, int ind, vector<int>& temp, vector<vector<int>>& res) {
+        
+        if (temp.size() >= 2) {
+            res.push_back(temp);
+        }
+
+        for (int j = ind; j < nums.size(); j++) {
+            
+            // only condition: non-decreasing
+            if (!temp.empty() && nums[j] < temp.back()) continue;
+
+            temp.push_back(nums[j]);              // pick
+            solve(nums, j + 1, temp, res);        // explore
+            temp.pop_back();                      // backtrack
+        }
+    }
+
+    vector<vector<int>> findSubsequences(vector<int>& nums) {
+        vector<vector<int>> res;
+        vector<int> temp;
+
+        solve(nums, 0, temp, res);
+        return res;
+    }
+};
+
+
+
+
+
+
+now putting set to get the only answer:
+class Solution {
+public:
+    void solve(vector<int>& nums, int ind, vector<int>& temp, vector<vector<int>>& res) {
+        
+        if (temp.size() >= 2) {
+            res.push_back(temp);
+        }
+
+        unordered_set<int> used;  // ✅ added
+
+        for (int j = ind; j < nums.size(); j++) {
+            
+            // non-decreasing condition
+            if (!temp.empty() && nums[j] < temp.back()) continue;
+
+            // avoid duplicates at same level
+            if (used.count(nums[j])) continue;
+            used.insert(nums[j]);
+
+            temp.push_back(nums[j]);
+            solve(nums, j + 1, temp, res);
+            temp.pop_back();
+        }
+    }
+
+    vector<vector<int>> findSubsequences(vector<int>& nums) {
+        vector<vector<int>> res;
+        vector<int> temp;
+
+        solve(nums, 0, temp, res);
+        return res;
+    }
+};
