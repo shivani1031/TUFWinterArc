@@ -1,0 +1,30 @@
+Palindrome Binary
+
+
+
+class Solution {
+public:
+    bool isBinaryPalindrome(int n) {
+        
+        // edge case
+        if(n == 0) return true;
+
+        string bin = "";
+
+        // convert to binary
+        while(n > 0) {
+            bin += (n % 2) + '0';
+            n /= 2;
+        }
+
+        // check palindrome
+        int l = 0, r = bin.size() - 1;
+        while(l < r) {
+            if(bin[l] != bin[r]) return false;
+            l++;
+            r--;
+        }
+
+        return true;
+    }
+};
