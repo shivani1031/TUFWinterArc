@@ -1,0 +1,34 @@
+1601. Maximum Number of Achievable Transfer Requests
+
+
+
+class Solution {
+public:
+int ans =0;
+void solve(vector<vector<int>>&requests, vector<int> &balance, int ind, int cnt)
+{
+if(ind == requests.size())
+{
+    for(int x : balance)
+    {
+        if(x!=0) return;
+    }
+    ans = max(ans, cnt);
+    return;
+}
+int from = requests[ind][0];
+int to = requests[ind][1];
+balance[from]--;
+balance[to]++;
+solve(requests, balance, ind+1, cnt+1);
+balance[from]++;
+balance[to]--;
+solve(requests, balance, ind+1,cnt );
+}
+    int maximumRequests(int n, vector<vector<int>>& requests) {
+        vector<int> balance(n, 0);
+        int cnt = 0;
+        solve(requests, balance, 0, 0);
+        return ans;
+    }
+};
