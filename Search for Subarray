@@ -1,0 +1,30 @@
+Search for Subarray
+
+
+class Solution {
+  public:
+    vector<int> search(vector<int> &a, vector<int> &b) {
+        // code here
+        int n = a.size();
+        int m = b.size();
+        int i =0;
+        int start;
+        int j =0;
+        vector<int> ans;
+        while(i<=n-m)
+        {
+            start = i;
+            j=0;
+            while(j<m && b[j]==a[i])
+            {
+                i++;
+                j++;
+            }
+            if(j==m)
+            ans.push_back(start);
+            
+            i = start+1;
+        }
+        return ans;
+    }
+};
