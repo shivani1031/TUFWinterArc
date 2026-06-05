@@ -1,0 +1,26 @@
+day5:c2
+
+
+
+  class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        unordered_map<int, int> mp;
+        int n = floor(nums.size()/2);
+        int temp = nums.size();
+        cout<<temp<<endl;
+        cout<<nums.size()/2<<endl;
+        cout<<floor(nums.size()/2)<<endl;
+        cout<<n<<endl;
+        for(int num: nums)
+        {
+            mp[num]++;
+            if(mp[num]>n)
+            {
+                cout<<mp[num]<<endl;
+            return num;
+            }
+        }
+return -1;
+    }
+};
