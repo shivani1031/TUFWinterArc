@@ -1,0 +1,40 @@
+70. Climbing Stairs
+
+
+
+class Solution {
+public:
+
+    int solve(int i, int n, vector<int>& dp)
+    {
+        // Reached exactly n
+        if (i == n)
+            return 1;
+
+        // Crossed n
+        if (i > n)
+            return 0;
+
+        // Already calculated
+        if (dp[i] != -1)
+            return dp[i];
+
+        // Take 1 step
+        int oneStep = solve(i + 1, n, dp);
+
+        // Take 2 steps
+        int twoStep = solve(i + 2, n, dp);
+
+        // Store answer
+        dp[i] = oneStep + twoStep;
+
+        return dp[i];
+    }
+
+    int climbStairs(int n)
+    {
+        vector<int> dp(n + 1, -1);
+
+        return solve(0, n, dp);
+    }
+};
