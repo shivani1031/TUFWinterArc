@@ -1,0 +1,30 @@
+1004. Max Consecutive Ones III
+
+class Solution {
+public:
+    int longestOnes(vector<int>& nums, int k) {
+        int left = 0, right = 0, maxlen = 0;
+        while(right<nums.size())
+        {
+            if(nums[right]==0)
+            {
+                k--;
+                // cout<<"k is"<< k<<endl;
+                
+            }
+            while(k<0 && left<nums.size())
+            {
+                
+                if(nums[left]==0) k++;
+                // cout<<"left is"<<left<<" left ele is"<<nums[left]<<endl;
+                left++;
+                
+            }
+            
+            maxlen = max(maxlen, right-left+1);
+            // cout<<"maxlen is "<<maxlen<<endl;
+            right++;
+        }
+        return maxlen;
+    }
+};
